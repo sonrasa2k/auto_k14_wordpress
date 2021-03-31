@@ -316,10 +316,12 @@ def get_content(url):
     kq = BeautifulSoup(requests.get(url, headers=headers).text, "html.parser")
     title = kq.find_all("h1", {"class": "kbwc-title"})
     title = title[0].get_text()
-    content = kq.find_all("div", {"class": ["knc-content"]})
+    title2 = kq.find_all("h2", {"class": "knc-sapo"})[0]
+    content = kq.find_all("div", {"class": ["knc-content"]})[0]
+    content.insert(0,title2)
     return (title,content)
 def upload_wp(title,content,username,passwd):
-    PutHtml(str(content[0]))
+    PutHtml(str(content))
     new = AutoUp()
     new.login("https://vnshowbiz.net/wp-admin/", username, passwd)
     new.Auto_UpPost("https://vnshowbiz.net/wp-admin/post-new.php", title, GetHtml())
@@ -358,6 +360,7 @@ def submit():
             if str(data[2]).strip() != str(url3):
                 list_url_true.append(url3)
         if len(list_url_true) == 0:
+            print("Chua co post moi , tool se dung trong 5p")
             time.sleep(300)
         else:
             list_url_true = list(set(list_url_true))
