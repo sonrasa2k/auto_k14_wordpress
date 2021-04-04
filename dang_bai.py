@@ -327,6 +327,12 @@ def upload_wp(title,content,username,passwd):
     new.Auto_UpPost("https://vnshowbiz.net/wp-admin/post-new.php", title, GetHtml())
     return "Dang bai thanh cong ♥"
 
+def write_link_tang_view(list_url):
+    with open("link_tang_view.txt","a+",encoding="utf-8") as f:
+        for url in list_url:
+            f.write(url+"\n")
+    f.close()
+    return "ghi file link thanh cong tim file link_tang_view de lay link"
 root = tk.Tk()
 root.title("Auto Dang Bai")
 
@@ -360,7 +366,6 @@ def submit():
             if str(data[2]).strip() != str(url3):
                 list_url_true.append(url3)
         if len(list_url_true) == 0:
-            print("Chua co post moi , tool se dung trong 5p")
             time.sleep(300)
         else:
             list_url_true = list(set(list_url_true))
@@ -370,6 +375,7 @@ def submit():
                 print(upload_wp(title,content,username,passwd))
                 time.sleep(5)
             print(get_file_link())
+            print(write_link_tang_view(list_url_true))
             time.sleep(300)
 label1 = tk.Label(root, text='Username', font=('calibre', 10, 'bold'))
 label2 = tk.Label(root, text='Password', font=('calibre', 10, 'bold'))
