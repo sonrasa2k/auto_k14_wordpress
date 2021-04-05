@@ -23,11 +23,11 @@ class AutoUp:
         return "Login Thành Công"
     def Auto_UpPost(self,URL_upload,title,content):
         self.driver.get(URL_upload)
-        check_point = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div/div/div/div/div/div[2]/div[2]/button")
+        check_point = self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div/div/div[2]/div[2]/button")
         check_point.click()
         check_point.click()
         check_point.click()
-        check_point = self.driver.find_element_by_xpath("/html/body/div[5]/div/div/div/div/div/div/div/div[2]/div[2]/button[2]")
+        check_point = self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div/div/div[2]/div[2]/button[2]")
         check_point.click()
         title_point = self.driver.find_element_by_xpath('//*[@id="post-title-0"]')
         title_point.send_keys(title)
@@ -35,11 +35,14 @@ class AutoUp:
         content_point = self.driver.find_element_by_css_selector("p.wp-block")
         content_point.send_keys(Keys.CONTROL, 'v')
         time.sleep(3)
-        upload_button = self.driver.find_element_by_css_selector("#editor > div > div > div.components-navigate-regions > div > div.interface-interface-skeleton__header > div > div.edit-post-header__settings > button.components-button.editor-post-publish-panel__toggle.editor-post-publish-button__button.is-primary")
+        upload_button = self.driver.find_element_by_xpath('//*[@id="editor"]/div[1]/div/div[1]/div/div[2]/button[2]')
         upload_button.click()
         time.sleep(2)
-        check_point2 = self.driver.find_element_by_css_selector("#editor > div > div > div.components-navigate-regions > div > div.interface-interface-skeleton__body > div.interface-interface-skeleton__actions > div > div > div > div.editor-post-publish-panel__header > div.editor-post-publish-panel__header-publish-button > button")
+        check_point2 = self.driver.find_element_by_xpath('//*[@id="editor"]/div[1]/div/div[2]/div[3]/div[3]/div/div/div[1]/div[1]/button')
         check_point2.click()
         time.sleep(3)
+        link_bai_viet_dang = self.driver.page_source.split('Bài viết đã được đăng.<a href="')[1].split('" class="')[0]
+        with open('link_da_dang.txt','a+',encoding='utf-8') as f:
+            f.write(link_bai_viet_dang+"\n")
         self.driver.quit()
         return "Đăng bài thành công ♥"

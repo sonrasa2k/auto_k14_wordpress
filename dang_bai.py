@@ -2,7 +2,7 @@ import re
 import time
 import random
 import win32clipboard
-
+from random import randrange
 
 from find_content import Get_Link_k14
 import requests
@@ -366,7 +366,15 @@ def submit():
             if str(data[2]).strip() != str(url3):
                 list_url_true.append(url3)
         if len(list_url_true) == 0:
-            time.sleep(300)
+            print("dang chay tang view ne ♥")
+            with open("link_da_dang.txt", "r", encoding="utf-8") as f:
+                list_link = f.readlines()
+            time_start = time.time()
+            time_run = time.time() - time_start
+            while time_run < 400:
+                linkss = list_link[randrange(0, len(list_link))].strip()
+                requests.get(linkss)
+                time_run = time.time() - time_start
         else:
             list_url_true = list(set(list_url_true))
             print(list_url_true)
@@ -376,7 +384,16 @@ def submit():
                 time.sleep(5)
             print(get_file_link())
             print(write_link_tang_view(list_url_true))
-            time.sleep(300)
+            print("dang chay tang view ne ♥")
+            with open("link_da_dang.txt","r",encoding="utf-8") as f:
+                list_link = f.readlines()
+            time_start = time.time()
+            time_run = time.time() - time_start
+            while time_run < 400:
+                linkss = list_link[randrange(0, len(list_link))].strip()
+                requests.get(linkss)
+                time_run = time.time() - time_start
+
 label1 = tk.Label(root, text='Username', font=('calibre', 10, 'bold'))
 label2 = tk.Label(root, text='Password', font=('calibre', 10, 'bold'))
 user = tk.Entry(root, textvariable=username, font=('calibre', 10, 'normal'))
