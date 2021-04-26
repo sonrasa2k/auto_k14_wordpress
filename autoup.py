@@ -10,7 +10,7 @@ class AutoUp:
         options.add_argument('--disable-gpu')
         options.add_argument("--log-level=3")  # fatal
         self.driver = webdriver.Chrome("chromedriver.exe",options=options)
-        self.driver.set_window_position(-10000, 0)
+        #self.driver.set_window_position(-10000, 0)
     def login(self,URL_Login_Wp,user_name, passwd):
         self.driver.get(URL_Login_Wp)
         user = self.driver.find_element_by_name("log")
